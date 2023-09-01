@@ -1,29 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import LottieView from "lottie-react-native";
+import HomeScreen from "./screens/HomeScreen";
+import { PaperProvider, DefaultTheme } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
+import Stack from "./Navigation/Stack";
 
 export default function App() {
+	const theme = {
+		...DefaultTheme,
+		colors: {
+			...DefaultTheme.colors,
+			primary: "tomato",
+			secondary: "yellow"
+		}
+	};
 	return (
-		<SafeAreaView style={styles.container}>
-			<View
-				style={{
-					marginTop: 20,
-					alignItems: "center",
-					justifyContent: "center",
-				}}>
-				<LottieView
-					autoPlay
-					style={{
-						width: 200,
-						height: 200,
-					}}
-					// Find more Lottie files at https://lottiefiles.com/featured
-					source={require("./assets/animation_llza5dm0.json")}
-				/>
-				<Text style={{ fontSize: 30, fontWeight: "bold" }}>✵VegaGPT</Text>
-			</View>
+		<PaperProvider
+			theme={theme}
+			settings={{
+				rippleEffectEnabled: true
+			}}>
+			<NavigationContainer>
+				<Stack />
+			</NavigationContainer>
 			<StatusBar style="auto" />
-		</SafeAreaView>
+		</PaperProvider>
 	);
 }
 
